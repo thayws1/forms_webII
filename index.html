@@ -33,10 +33,10 @@
           <input type="email" id="email" name="email" required />
         </div>
         <div class="form-group">
-          <label for="descricao">Deixe seu feedback a respeito do produto:</label>
+          <label for="feedback">Deixe seu feedback a respeito do produto:</label>
           <textarea
-            id="descricao"
-            name="descricao"
+            id="feedback"
+            name="feedback"
             rows="4"
             required
           ></textarea>
@@ -54,27 +54,34 @@
         const nome = document.getElementById("nome").value;
         const telefone = document.getElementById("telefone").value;
         const email = document.getElementById("email").value;
-        const descricao = document.getElementById("descricao").value;
+        const feedback = document.getElementById("feedback").value;
 
         // Cria uma variável com os dados do formulário
         const dados = {
           nome: nome,
           telefone: telefone,
           email: email,
-          descricao: descricao,
+          feedback: feedback,
         };
         console.log(dados);
         console.log(JSON.stringify(dados));
 
         try {
           // Faz uma requisição para a sua API
-          await fetch("INSIRA O LINK DA SUA API AQUI", {
+          await fetch("https://meu-primeiro-banco-de-dados.onrender.com/formulario", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(dados),
-          });
+          }).then((Response)=>{
+            if(Response.ok){
+              alert("Formulario enviado com sucesso!")
+            }else{
+              alert("Erro ao enviar formulario!");
+            }
+          })
+          
         } catch (error) {
           console.log(error);
         }
